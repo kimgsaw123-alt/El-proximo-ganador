@@ -131,7 +131,7 @@
 </head>
 <body class="p-3 sm:p-5 md:p-6">
 
-    <!-- 1. PANEL CARGANDO LA PARTIDA (PRIMERO EN MOSTRARSE) -->
+    <!-- 1. PANEL CARGANDO LA PARTIDA -->
     <div id="loading-screen" class="fixed inset-0 z-50 flex flex-col items-center justify-center p-6 bg-gradient-to-br from-[#24064a] via-[#120326] to-[#070112]">
         <div class="max-w-md w-full rounded-3xl bg-white/10 backdrop-blur-xl border-2 border-amber-300/50 p-7 text-center space-y-5 shadow-2xl">
             <div class="text-5xl animate-bounce">🎰✨</div>
@@ -189,20 +189,17 @@
                     </div>
 
                     <div class="flex items-center flex-wrap gap-2">
-                        <!-- Indicador En Línea (Nube) -->
                         <span id="pill-sync" class="text-[11px] font-bold px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-200 border border-emerald-400/35">
                             ● En línea (Nube)
                         </span>
 
-                        <!-- Sala -->
                         <span id="pill-room" class="text-[11px] font-bold px-2.5 py-1 rounded-full bg-cyan-500/20 text-cyan-200 border border-cyan-300/35">
                             🌐 Sala: MESA_VIP_01
                         </span>
 
-                        <!-- Semáforo de recarga / sincronización: punto rojo cuando recarga/no se puede, verde cuando sí se puede -->
                         <span id="pill-recharge-traffic" class="inline-flex items-center gap-1.5 text-[11px] font-extrabold px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-200 border border-emerald-400/40">
                             <span id="traffic-dot" class="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399]"></span>
-                            <span id="traffic-label">Recargas: Listo para acreditar</span>
+                            <span id="traffic-label">Listo para acreditar</span>
                         </span>
 
                         <span id="pill-player" class="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-white/10 text-amber-100 border border-white/15">
@@ -211,7 +208,6 @@
                     </div>
                 </div>
 
-                <!-- Controles de Sonido / Ambiente Casino, Cambiar Perfil y Admin -->
                 <div class="flex flex-wrap items-center gap-2">
                     <button type="button" id="btn-music-toggle" class="px-3.5 py-2 rounded-xl bg-gradient-to-r from-pink-500/35 to-purple-500/35 hover:from-pink-500/50 hover:to-purple-500/50 border border-pink-300/45 text-white font-bold text-xs flex items-center gap-1.5 transition">
                         <span id="music-icon">🎶</span>
@@ -234,10 +230,9 @@
             </div>
         </header>
 
-        <!-- PANTALLA DE INGRESO SENCILLA (NICK + WHATSAPP + PIN 4 DÍGITOS) + MODO DEMO -->
+        <!-- PANTALLA DE INGRESO SENCILLA -->
         <section id="entry-screen" class="rounded-3xl bg-white/10 backdrop-blur-md border border-white/20 p-4 sm:p-6 shadow-2xl">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
-                <!-- Demo -->
                 <div class="lg:col-span-5 rounded-2xl bg-gradient-to-br from-cyan-500/20 via-indigo-600/20 to-fuchsia-600/20 border border-cyan-300/40 p-5 flex flex-col justify-between space-y-4">
                     <div class="space-y-2.5">
                         <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-400/20 border border-cyan-300/45 text-cyan-200 text-xs font-extrabold">
@@ -253,7 +248,6 @@
                     </button>
                 </div>
 
-                <!-- Formulario Sencillo: Nick, WhatsApp y PIN -->
                 <div class="lg:col-span-7 rounded-2xl bg-gradient-to-br from-pink-500/20 via-purple-600/15 to-amber-500/20 border border-pink-300/40 p-5 space-y-4">
                     <div class="space-y-1">
                         <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-pink-500/25 border border-pink-300/45 text-pink-200 text-xs font-extrabold">
@@ -268,13 +262,13 @@
                     <form id="player-entry-form" class="space-y-3">
                         <div>
                             <label for="inp-nick" class="block text-xs font-bold text-amber-200 mb-1">Nick *</label>
-                            <input id="inp-nick" type="text" required placeholder="Ej: SebasFlow" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950/80 border border-white/20 text-white text-sm placeholder-white/40 focus:outline-none focus:border-amber-300">
+                            <input id="inp-nick" type="text" required placeholder="Ej: Sebasflow" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950/80 border border-white/20 text-white text-sm placeholder-white/40 focus:outline-none focus:border-amber-300">
                         </div>
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                             <div>
                                 <label for="inp-whatsapp" class="block text-xs font-bold text-amber-200 mb-1">Número de WhatsApp *</label>
-                                <input id="inp-whatsapp" type="tel" required placeholder="Ej: 3001234567" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950/80 border border-white/20 text-white text-sm placeholder-white/40 focus:outline-none focus:border-amber-300">
+                                <input id="inp-whatsapp" type="tel" required placeholder="Ej: 3023607054" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950/80 border border-white/20 text-white text-sm placeholder-white/40 focus:outline-none focus:border-amber-300">
                             </div>
                             <div>
                                 <label for="inp-pin" class="block text-xs font-bold text-amber-200 mb-1">PIN de 4 dígitos *</label>
@@ -295,7 +289,6 @@
         <!-- ÁREA PRINCIPAL DEL JUEGO -->
         <main id="game-workspace" class="hidden grid grid-cols-1 lg:grid-cols-12 gap-4 items-start">
 
-            <!-- Tragamonedas 5x3 (8 columnas) -->
             <section class="lg:col-span-8 slot-cabinet rounded-3xl p-3.5 sm:p-5 space-y-3.5">
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
                     <div class="rounded-2xl bg-black/45 border border-amber-300/35 p-3">
@@ -330,7 +323,6 @@
                     ¡Elige tu giro desde $50 hasta $5.000 COP y haz sonar las monedas!
                 </div>
 
-                <!-- Selector de Giro ($50 a $5.000) y Botón GIRAR -->
                 <div class="rounded-2xl bg-black/40 border border-white/15 p-3 sm:p-4 space-y-3">
                     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                         <span class="text-xs font-extrabold uppercase tracking-wider text-pink-200">
@@ -351,7 +343,6 @@
                 </div>
             </section>
 
-            <!-- Columna Lateral del Jugador: Únicamente Total de Premios y Retiro Realizado -->
             <aside class="lg:col-span-4 space-y-4">
                 <div class="rounded-3xl bg-white/10 backdrop-blur-md border border-white/20 p-4 sm:p-5 space-y-4 shadow-xl">
                     <div class="flex items-center justify-between">
@@ -384,7 +375,7 @@
         </main>
     </div>
 
-    <!-- MODAL DE RECARGA POR NEQUI (3106047749, MÍN $10.000, PROMO $30.000, NOTA 1 MINUTO, SIN REFERENCIA) -->
+    <!-- MODAL DE RECARGA -->
     <div id="modal-recharge" class="hidden fixed inset-0 z-40 bg-black/80 backdrop-blur-sm p-4 flex items-center justify-center overflow-y-auto">
         <div class="w-full max-w-lg rounded-3xl bg-slate-900 border-2 border-emerald-400/55 p-5 sm:p-6 space-y-4 shadow-2xl">
             <div class="flex items-center justify-between">
@@ -435,7 +426,7 @@
         </div>
     </div>
 
-    <!-- MODAL DE RETIRO ($30.000 A $100.000 — 70% JUGADOR / 30% CASA) -->
+    <!-- MODAL DE RETIRO -->
     <div id="modal-withdraw" class="hidden fixed inset-0 z-40 bg-black/80 backdrop-blur-sm p-4 flex items-center justify-center overflow-y-auto">
         <div class="w-full max-w-lg rounded-3xl bg-slate-900 border-2 border-amber-400/55 p-5 sm:p-6 space-y-4 shadow-2xl">
             <div class="flex items-center justify-between">
@@ -498,7 +489,6 @@
                 <button type="button" data-close-modal="modal-admin" class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 text-white font-bold">✕</button>
             </div>
 
-            <!-- Acceso Restringido -->
             <div id="admin-lock-view" class="max-w-sm mx-auto py-6 space-y-4 text-center">
                 <div class="text-4xl">🛡️</div>
                 <h4 class="font-display text-2xl font-bold text-white">Acceso Restringido</h4>
@@ -512,9 +502,7 @@
                 </form>
             </div>
 
-            <!-- Dashboard Admin -->
             <div id="admin-dashboard-view" class="hidden space-y-5">
-                <!-- Métricas Globales: Diarios, Activos, Semanales, Apostado General, Premios Pagados, Casa -->
                 <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2.5">
                     <div class="rounded-2xl bg-white/5 border border-white/10 p-3">
                         <div class="text-[11px] text-white/65">Usuarios Diarios</div>
@@ -542,31 +530,26 @@
                     </div>
                 </div>
 
-                <!-- 1. Usuarios en Línea y si han solicitado Recarga o Retiro -->
                 <div class="rounded-2xl bg-white/5 border border-emerald-400/30 p-4 space-y-2.5">
                     <h4 class="font-display text-base font-bold text-emerald-300">🟢 Usuarios en Línea y Solicitudes Activas (Recarga / Retiro)</h4>
                     <div id="adm-online-requests-list" class="space-y-2 max-h-56 overflow-y-auto text-xs"></div>
                 </div>
 
-                <!-- 2. Solicitudes de Recargas de Nequi (Nick, WhatsApp, Valor, PIN, Hora, Estado) -->
                 <div class="rounded-2xl bg-white/5 border border-cyan-400/30 p-4 space-y-2.5">
                     <h4 class="font-display text-base font-bold text-cyan-200">💳 Solicitudes de Recargas Nequi</h4>
                     <div id="adm-recharges-list" class="space-y-2 max-h-60 overflow-y-auto text-xs"></div>
                 </div>
 
-                <!-- 3. Solicitudes de Retiro 70% Jugador / 30% Casa (Pendiente / Aprobado + Historial Horario) -->
                 <div class="rounded-2xl bg-white/5 border border-amber-400/30 p-4 space-y-2.5">
                     <h4 class="font-display text-base font-bold text-amber-300">💸 Solicitudes de Retiro (70% Jugador / 30% Casa)</h4>
                     <div id="adm-withdrawals-list" class="space-y-2 max-h-60 overflow-y-auto text-xs"></div>
                 </div>
 
-                <!-- 4. Detalle por Jugador: Total Apostado y Balance de Pérdida de Cada Jugador -->
                 <div class="rounded-2xl bg-white/5 border border-pink-400/30 p-4 space-y-2.5">
                     <h4 class="font-display text-base font-bold text-pink-200">📊 Total Apostado y Balance de Pérdida por Jugador</h4>
                     <div id="adm-users-list" class="space-y-2.5 max-h-64 overflow-y-auto text-xs"></div>
                 </div>
 
-                <!-- 5. Sección Única de Configuración -->
                 <div class="rounded-2xl bg-white/5 border border-white/15 p-4 space-y-3 text-xs">
                     <h4 class="font-display text-base font-bold text-yellow-200">⚙️ Configuración General de Sala y Banca</h4>
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
@@ -611,7 +594,6 @@
         </div>
     </div>
 
-    <!-- Notificaciones flotantes -->
     <div id="toast-container" class="fixed bottom-4 right-4 z-50 space-y-2 max-w-xs w-full pointer-events-none"></div>
 
     <script>
@@ -625,7 +607,6 @@
         (function () {
             "use strict";
 
-            // ==================== CONSTANTES Y REGLAS ====================
             const BET_STEPS = [50, 100, 200, 500, 1000, 1500, 3000, 5000];
             const DEMO_START_BALANCE = 50000;
             const MIN_RECHARGE = 10000;
@@ -702,7 +683,7 @@
                 } catch (_) {}
             }
 
-            // ==================== AUDIO ENVOLVENTE DE CASINO + SONIDOS DE MONEDAS Y PÉRDIDA ====================
+            // ==================== AUDIO CASINO ====================
             class CasinoVegasAudio {
                 constructor() {
                     this.ctx = null;
@@ -710,7 +691,7 @@
                     this.musicGain = null;
                     this.sfxGain = null;
                     this.enabled = true;
-                    this.groove = "vegas"; // "vegas" | "tropical"
+                    this.groove = "vegas";
                     this.volume = 0.75;
                     this.step = 0;
                     this.timerId = null;
@@ -730,7 +711,6 @@
                     this.masterGain = this.ctx.createGain();
                     this.musicGain = this.ctx.createGain();
                     this.sfxGain = this.ctx.createGain();
-
                     this.musicGain.connect(this.masterGain);
                     this.sfxGain.connect(this.masterGain);
                     this.masterGain.connect(this.ctx.destination);
@@ -790,7 +770,6 @@
                     lp.type = "lowpass";
                     lp.frequency.setValueAtTime(this.groove === "vegas" ? 1600 : 2100, now);
                     lp.connect(this.musicGain);
-
                     notes.forEach((f) => {
                         const osc = this.ctx.createOscillator();
                         const gain = this.ctx.createGain();
@@ -846,7 +825,6 @@
                     this.stopLoop();
                     if (!this.enabled) return;
 
-                    // 8 compases variados para evitar sensación repetitiva
                     const bars = this.groove === "vegas"
                         ? [
                             { b: 98.00, c: [392.0, 493.88, 587.33], arp: [783.99, 987.77, 1174.66, 987.77] },
@@ -874,15 +852,9 @@
                         const barIdx = Math.floor(this.step / 8) % bars.length;
                         const beat = this.step % 8;
                         const bar = bars[barIdx];
-
-                        if (beat === 0 || beat === 4) {
-                            this.playChord(bar.c, 0.85);
-                        }
-                        if (beat % 2 === 0) {
-                            this.playBass(beat === 0 ? bar.b : bar.b * 1.5, 0.2);
-                        }
+                        if (beat === 0 || beat === 4) this.playChord(bar.c, 0.85);
+                        if (beat % 2 === 0) this.playBass(beat === 0 ? bar.b : bar.b * 1.5, 0.2);
                         this.playArpNote(bar.arp[beat % bar.arp.length], 0.13);
-
                         this.step += 1;
                         const ms = this.spinBoost ? 145 : (this.groove === "vegas" ? 215 : 190);
                         this.timerId = setTimeout(tick, ms);
@@ -898,12 +870,10 @@
                     }
                 }
 
-                // Sonido del botón GIRAR
                 sfxSpinButton() {
                     if (!this.enabled || !this.ensureContext()) return;
                     const now = this.ctx.currentTime;
-                    const freqs = [440, 587.33, 880];
-                    freqs.forEach((f, i) => {
+                    [440, 587.33, 880].forEach((f, i) => {
                         const osc = this.ctx.createOscillator();
                         const gain = this.ctx.createGain();
                         osc.type = "triangle";
@@ -951,26 +921,21 @@
                     osc.stop(now + 0.09);
                 }
 
-                // Sonido de pérdida en cada tiro sin premio
                 sfxLoss() {
                     if (!this.enabled || !this.ensureContext()) return;
                     const now = this.ctx.currentTime;
-                    const notes = [311.13, 246.94, 196.00];
-                    notes.forEach((f, idx) => {
+                    [311.13, 246.94, 196.00].forEach((f, idx) => {
                         const start = now + idx * 0.09;
                         const osc = this.ctx.createOscillator();
                         const gain = this.ctx.createGain();
                         osc.type = "sawtooth";
                         osc.frequency.setValueAtTime(f, start);
                         osc.frequency.linearRampToValueAtTime(f * 0.88, start + 0.14);
-
                         const lp = this.ctx.createBiquadFilter();
                         lp.type = "lowpass";
                         lp.frequency.setValueAtTime(750, start);
-
                         gain.gain.setValueAtTime(0.18, start);
                         gain.gain.exponentialRampToValueAtTime(0.001, start + 0.16);
-
                         osc.connect(lp);
                         lp.connect(gain);
                         gain.connect(this.sfxGain);
@@ -979,28 +944,23 @@
                     });
                 }
 
-                // Sonido durísimo de lluvia de monedas al ganar
                 sfxCoinsJackpot(big = false) {
                     if (!this.enabled || !this.ensureContext()) return;
                     const now = this.ctx.currentTime;
                     const coinCount = big ? 16 : 9;
                     const coinFreqs = [1318.51, 1567.98, 1760.0, 2093.0, 2349.32, 2637.02];
-
                     for (let i = 0; i < coinCount; i++) {
                         const t = now + i * 0.055;
                         const f1 = coinFreqs[i % coinFreqs.length];
                         const f2 = f1 * 1.25;
-
                         const osc = this.ctx.createOscillator();
                         const gain = this.ctx.createGain();
                         osc.type = "sine";
                         osc.frequency.setValueAtTime(f1, t);
                         osc.frequency.setValueAtTime(f2, t + 0.03);
-
                         gain.gain.setValueAtTime(0.001, t);
                         gain.gain.linearRampToValueAtTime(0.32, t + 0.01);
                         gain.gain.exponentialRampToValueAtTime(0.001, t + 0.14);
-
                         osc.connect(gain);
                         gain.connect(this.sfxGain);
                         osc.start(t);
@@ -1058,7 +1018,7 @@
             }
 
             let state = loadInitialState();
-            let activeMode = null; // null | "demo" | "real"
+            let activeMode = null;
             let activeUserId = null;
             let demoBalance = DEMO_START_BALANCE;
             let demoTotalPrizes = 0;
@@ -1068,7 +1028,6 @@
             let adminUnlocked = false;
             let remoteConnected = false;
 
-            // Semáforo: ROJO cuando está sincronizando/ocupado o sin conexión confirmada; VERDE cuando está listo para acreditar
             function setRechargeTrafficState(isBusyOrRed) {
                 const dot = document.getElementById("traffic-dot");
                 const lbl = document.getElementById("traffic-label");
@@ -1086,20 +1045,25 @@
                 }
             }
 
-            function persistState(pushRemote = true) {
+            function writeLocalOnly() {
                 try {
                     state.settings.dbUrl = normalizeDbUrl(state.settings.dbUrl);
-                    state.settings.updatedAt = Date.now();
                     const room = (state.settings.roomCode || DEFAULT_CLOUD_CONFIG.roomCode).trim();
                     localStorage.setItem("TU_APP_QUE_SI_TE_PAGA_ACTIVE_ROOM", room);
                     localStorage.setItem(getRoomStorageKey(room), JSON.stringify(state));
-                    if (pushRemote) {
-                        pushToRemote();
-                    }
                 } catch (_) {}
             }
 
-            // ==================== SINCRONIZACIÓN REMOTA FIREBASE ====================
+            function persistState(pushRemote = true) {
+                state.settings.updatedAt = Date.now();
+                writeLocalOnly();
+                if (pushRemote) {
+                    return pushToRemote();
+                }
+                return Promise.resolve(true);
+            }
+
+            // ==================== SINCRONIZACIÓN REMOTA SIN PISAR APROBACIONES ====================
             function getRemoteDatabaseEndpoint() {
                 const rawUrl = normalizeDbUrl(state.settings && state.settings.dbUrl);
                 if (!rawUrl || rawUrl.includes("tu-proyecto")) return null;
@@ -1124,58 +1088,91 @@
                         pillSync.textContent = "● En línea (Nube)";
                         pillSync.className = "text-[11px] font-bold px-2.5 py-1 rounded-full bg-emerald-500/25 text-emerald-200 border border-emerald-400/40";
                     }
-                    if (detailEl) {
-                        detailEl.textContent = `Conectado a Firebase Realtime Database en la sala "${room}".`;
-                    }
+                    if (detailEl) detailEl.textContent = `Conectado a Firebase Realtime Database en la sala "${room}".`;
                 } else if (endpoint) {
                     if (pillSync) {
                         pillSync.textContent = "● En línea (Nube)";
                         pillSync.className = "text-[11px] font-bold px-2.5 py-1 rounded-full bg-amber-500/20 text-amber-200 border border-amber-300/35";
                     }
-                    if (detailEl) {
-                        detailEl.textContent = `Sincronizando con Firebase en la sala "${room}".`;
-                    }
-                } else {
-                    if (pillSync) {
-                        pillSync.textContent = "● En línea (Local)";
-                        pillSync.className = "text-[11px] font-bold px-2.5 py-1 rounded-full bg-cyan-500/20 text-cyan-200 border border-cyan-300/35";
-                    }
                 }
+            }
+
+            function mergeRequestArrays(localArr, remoteArr) {
+                const map = new Map();
+                const addItem = (item) => {
+                    if (!item || !item.id) return;
+                    const prev = map.get(item.id);
+                    if (!prev) {
+                        map.set(item.id, { ...item });
+                        return;
+                    }
+                    // Si cualquiera de los dos está aprobado, gana "approved" para que nunca vuelva a "pending"
+                    const approved = prev.status === "approved" || item.status === "approved";
+                    const pTs = Number(prev.approvedAt || prev.createdAt || 0);
+                    const iTs = Number(item.approvedAt || item.createdAt || 0);
+                    const base = iTs >= pTs ? { ...prev, ...item } : { ...item, ...prev };
+                    if (approved) {
+                        base.status = "approved";
+                        base.approvedAt = Math.max(Number(prev.approvedAt || 0), Number(item.approvedAt || 0), Date.now());
+                    }
+                    map.set(item.id, base);
+                };
+
+                (Array.isArray(remoteArr) ? remoteArr : []).forEach(addItem);
+                (Array.isArray(localArr) ? localArr : []).forEach(addItem);
+
+                return Array.from(map.values()).sort((a, b) => Number(b.createdAt || 0) - Number(a.createdAt || 0));
             }
 
             function mergeRemoteData(remoteData) {
                 try {
                     if (!remoteData || typeof remoteData !== "object") return;
-                    const remTs = Number(remoteData.settings && remoteData.settings.updatedAt ? remoteData.settings.updatedAt : 0);
-                    const locTs = Number(state.settings && state.settings.updatedAt ? state.settings.updatedAt : 0);
 
-                    if (remoteData.settings && remTs >= locTs) {
+                    if (remoteData.settings) {
                         state.settings = {
                             ...state.settings,
                             ...remoteData.settings,
-                            dbUrl: normalizeDbUrl(remoteData.settings.dbUrl || state.settings.dbUrl)
+                            dbUrl: normalizeDbUrl(remoteData.settings.dbUrl || state.settings.dbUrl),
+                            totalWagered: Math.max(Number(state.settings.totalWagered) || 0, Number(remoteData.settings.totalWagered) || 0),
+                            totalWon: Math.max(Number(state.settings.totalWon) || 0, Number(remoteData.settings.totalWon) || 0),
+                            totalPaidOutNet: Math.max(Number(state.settings.totalPaidOutNet) || 0, Number(remoteData.settings.totalPaidOutNet) || 0),
+                            totalHouseRetained: Math.max(Number(state.settings.totalHouseRetained) || 0, Number(remoteData.settings.totalHouseRetained) || 0)
                         };
                     }
+
                     if (remoteData.users && typeof remoteData.users === "object") {
                         Object.keys(remoteData.users).forEach((uid) => {
                             const ru = remoteData.users[uid];
                             const lu = state.users[uid];
-                            const rTime = Number(ru.updatedAt || ru.lastActiveAt || 0);
-                            const lTime = Number(lu && (lu.updatedAt || lu.lastActiveAt) ? (lu.updatedAt || lu.lastActiveAt) : 0);
-                            if (!lu || rTime >= lTime) {
-                                state.users[uid] = { ...(lu || {}), ...ru };
+                            if (!lu) {
+                                state.users[uid] = { ...ru };
+                                return;
                             }
+                            const rTime = Number(ru.updatedAt || ru.lastActiveAt || 0);
+                            const lTime = Number(lu.updatedAt || lu.lastActiveAt || 0);
+                            const mergedUser = rTime >= lTime ? { ...lu, ...ru } : { ...ru, ...lu };
+
+                            // Si en la nube o en local llegó una alerta de recarga reciente, conservarla hasta que se descarte
+                            const rAlertTs = Number(ru.rechargeAlert && ru.rechargeAlert.ts ? ru.rechargeAlert.ts : 0);
+                            const lAlertTs = Number(lu.rechargeAlert && lu.rechargeAlert.ts ? lu.rechargeAlert.ts : 0);
+                            if (rAlertTs > lAlertTs) {
+                                mergedUser.rechargeAlert = ru.rechargeAlert;
+                                mergedUser.balance = Math.max(Number(lu.balance) || 0, Number(ru.balance) || 0);
+                            } else if (lAlertTs > rAlertTs) {
+                                mergedUser.rechargeAlert = lu.rechargeAlert;
+                                mergedUser.balance = Math.max(Number(lu.balance) || 0, Number(ru.balance) || 0);
+                            }
+
+                            state.users[uid] = mergedUser;
                         });
                     }
-                    if (Array.isArray(remoteData.rechargeRequests) && remTs >= locTs) {
-                        state.rechargeRequests = remoteData.rechargeRequests;
-                    }
-                    if (Array.isArray(remoteData.withdrawalRequests) && remTs >= locTs) {
-                        state.withdrawalRequests = remoteData.withdrawalRequests;
-                    }
 
-                    persistState(false);
+                    state.rechargeRequests = mergeRequestArrays(state.rechargeRequests, remoteData.rechargeRequests);
+                    state.withdrawalRequests = mergeRequestArrays(state.withdrawalRequests, remoteData.withdrawalRequests);
+
+                    writeLocalOnly();
                     updateSyncPills();
+
                     if (!isSpinning && activeMode) {
                         updateHUD();
                         checkRechargeAlertBanner();
@@ -1194,7 +1191,7 @@
                     if (!url) {
                         remoteConnected = false;
                         updateSyncPills();
-                        return;
+                        return false;
                     }
                     const res = await fetch(url, {
                         method: "PUT",
@@ -1203,9 +1200,11 @@
                     });
                     remoteConnected = Boolean(res && res.ok);
                     updateSyncPills();
+                    return remoteConnected;
                 } catch (_) {
                     remoteConnected = false;
                     updateSyncPills();
+                    return false;
                 } finally {
                     isSyncingNow = false;
                     setRechargeTrafficState(!remoteConnected);
@@ -1244,7 +1243,7 @@
                 }
             }
 
-            // ==================== MOTOR DE TRAGAMONEDAS 5x3 Y REGLAS ESPECIALES ====================
+            // ==================== MOTOR DE TRAGAMONEDAS ====================
             function pickWeightedSymbol() {
                 const totalWeight = SYMBOLS.reduce((acc, s) => acc + s.weight, 0);
                 let r = Math.random() * totalWeight;
@@ -1259,9 +1258,7 @@
                 const grid = [];
                 for (let c = 0; c < COLS; c++) {
                     const col = [];
-                    for (let r = 0; r < ROWS; r++) {
-                        col.push(pickWeightedSymbol());
-                    }
+                    for (let r = 0; r < ROWS; r++) col.push(pickWeightedSymbol());
                     grid.push(col);
                 }
                 return grid;
@@ -1282,7 +1279,6 @@
                 const symBasic = SYMBOLS[2 + Math.floor(Math.random() * 4)];
                 const symHigh = SYMBOLS[0];
 
-                // Contadores por usuario
                 if (userObj) {
                     userObj.streakCount = Number(userObj.streakCount) || 0;
                     userObj.spin1500Count = Number(userObj.spin1500Count) || 0;
@@ -1294,20 +1290,13 @@
                     userObj.won50Spins30kBonus = Boolean(userObj.won50Spins30kBonus);
                 }
 
-                // Regla especial: recarga de $30.000 -> después de 50 giros sale premio de $10.000
                 if (userObj && userObj.has30kRecharge && !userObj.won50Spins30kBonus && userObj.spinsAfter30k >= 50) {
                     userObj.won50Spins30kBonus = true;
                     userObj.streakCount = 0;
                     const built = makeWinningGrid(symHigh, 5, rowIdx);
-                    return {
-                        grid: built.grid,
-                        winCoords: built.winCoords,
-                        payout: 10000,
-                        note: "🔥 ¡Bono de 50 giros por recarga de $30.000: +$10.000!"
-                    };
+                    return { grid: built.grid, winCoords: built.winCoords, payout: 10000, note: "🔥 ¡Bono de 50 giros por recarga de $30.000: +$10.000!" };
                 }
 
-                // Regla especial: giros de $1.500 -> primera vez premio de $5.000; luego cada 10 tiros de $1.500 puede ganar $5.000
                 if (bet === 1500) {
                     if (userObj) {
                         userObj.spin1500Count += 1;
@@ -1315,30 +1304,19 @@
                             userObj.won1500FirstTime = true;
                             userObj.spinsSince1500Win = 0;
                             const built = makeWinningGrid(symHigh, 4, rowIdx);
-                            return {
-                                grid: built.grid,
-                                winCoords: built.winCoords,
-                                payout: 5000,
-                                note: "💎 ¡Primer giro de $1.500 premiado con $5.000!"
-                            };
+                            return { grid: built.grid, winCoords: built.winCoords, payout: 5000, note: "💎 ¡Primer giro de $1.500 premiado con $5.000!" };
                         }
                         userObj.spinsSince1500Win += 1;
                         if (userObj.spinsSince1500Win >= 10 && Math.random() < 0.55) {
                             userObj.spinsSince1500Win = 0;
                             const built = makeWinningGrid(symHigh, 4, rowIdx);
-                            return {
-                                grid: built.grid,
-                                winCoords: built.winCoords,
-                                payout: 5000,
-                                note: "⚡ ¡10 tiros de $1.500 completados: premio de $5.000!"
-                            };
+                            return { grid: built.grid, winCoords: built.winCoords, payout: 5000, note: "⚡ ¡10 tiros de $1.500 completados: premio de $5.000!" };
                         }
                         userObj.streakCount = 0;
                         return { grid: createRandomGrid(), winCoords: [], payout: 0, note: null };
                     }
                 }
 
-                // Regla especial: giros de $100, $200 y $500 -> mayor chance de racha seguida hasta 3 veces
                 const isStreakBet = [100, 200, 500].includes(bet);
                 if (userObj && isStreakBet && userObj.streakCount > 0 && userObj.streakCount < 3) {
                     const streakChance = bet === 500 ? 0.52 : (bet === 200 ? 0.48 : 0.44);
@@ -1346,33 +1324,22 @@
                         userObj.streakCount += 1;
                         const payout = Math.max(50, Math.round(bet * (0.85 + Math.random() * 0.45)));
                         const built = makeWinningGrid(symBasic, 3, rowIdx);
-                        return {
-                            grid: built.grid,
-                            winCoords: built.winCoords,
-                            payout,
-                            note: `🔥 ¡Racha ${userObj.streakCount}/3 en giro de ${formatMoney(bet)}!`
-                        };
+                        return { grid: built.grid, winCoords: built.winCoords, payout, note: `🔥 ¡Racha ${userObj.streakCount}/3 en giro de ${formatMoney(bet)}!` };
                     } else {
                         userObj.streakCount = 0;
                     }
                 }
 
-                // Probabilidad base equilibrada (premia de vez en cuando, mantiene ventaja de la casa)
                 let winChance = 0.21;
                 if (isStreakBet) winChance = 0.30;
-                if (userObj && userObj.has30kRecharge && userObj.earlyHits30k < 5) {
-                    winChance = 0.42;
-                }
+                if (userObj && userObj.has30kRecharge && userObj.earlyHits30k < 5) winChance = 0.42;
 
                 if (Math.random() < winChance) {
                     if (userObj) {
                         userObj.streakCount = isStreakBet ? Math.min(3, (userObj.streakCount || 0) + 1) : 0;
-                        if (userObj.has30kRecharge && userObj.earlyHits30k < 5) {
-                            userObj.earlyHits30k += 1;
-                        }
+                        if (userObj.has30kRecharge && userObj.earlyHits30k < 5) userObj.earlyHits30k += 1;
                     }
 
-                    // Si tiene recarga de $30.000 y está en sus primeros 5 aciertos, da puntos pequeños
                     let payout = Math.max(25, Math.round(bet * (0.70 + Math.random() * 0.55)));
                     let note = null;
                     if (userObj && userObj.has30kRecharge && userObj.earlyHits30k <= 5) {
@@ -1480,7 +1447,6 @@
                 function frame(now) {
                     const progress = Math.min(1, (now - startTime) / duration);
                     const animatedGrid = [];
-
                     for (let c = 0; c < COLS; c++) {
                         if (progress >= stopTimes[c]) {
                             animatedGrid.push(finalGrid[c]);
@@ -1490,15 +1456,12 @@
                             }
                         } else {
                             const col = [];
-                            for (let r = 0; r < ROWS; r++) {
-                                col.push(pickWeightedSymbol());
-                            }
+                            for (let r = 0; r < ROWS; r++) col.push(pickWeightedSymbol());
                             animatedGrid.push(col);
                         }
                     }
 
                     drawSlotCanvas(animatedGrid, []);
-
                     if (progress < 1) {
                         requestAnimationFrame(frame);
                     } else {
@@ -1515,7 +1478,7 @@
                 requestAnimationFrame(frame);
             }
 
-            // ==================== HUD Y FLUJO DE JUGADOR ====================
+            // ==================== HUD Y FLUJO ====================
             function getActiveUser() {
                 if (activeMode === "real" && activeUserId && state.users[activeUserId]) {
                     return state.users[activeUserId];
@@ -1679,7 +1642,7 @@
                 });
             }
 
-            // ==================== RECARGAS NEQUI + WHATSAPP + ANUNCIO EXITOSO ====================
+            // ==================== RECARGAS Y ACREDITACIÓN FIRME ====================
             function buildRechargeWhatsAppUrl(userObj, amount) {
                 const adminWa = cleanPhoneDigits(state.settings.whatsappAdmin || DEFAULT_CLOUD_CONFIG.whatsappAdmin);
                 const nequiAcc = state.settings.nequiNumber || DEFAULT_CLOUD_CONFIG.nequiNumber;
@@ -1719,6 +1682,69 @@
                 casinoAudio.sfxCoinsJackpot(true);
             }
 
+            async function creditUserBalance(userId, amount, fromRequestId = null) {
+                const u = state.users[userId];
+                const addAmt = Math.round(Number(amount) || 0);
+                if (!u || addAmt <= 0) return;
+
+                // Traer lo último de la nube primero para no perder giros o datos del jugador
+                await pullFromRemote();
+
+                const targetUser = state.users[userId] || u;
+                targetUser.balance = (Number(targetUser.balance) || 0) + addAmt;
+                if (addAmt >= PROMO_RECHARGE_30K) {
+                    targetUser.has30kRecharge = true;
+                    targetUser.spinsAfter30k = 0;
+                    targetUser.won50Spins30kBonus = false;
+                }
+                targetUser.updatedAt = Date.now() + 5000;
+                targetUser.rechargeAlert = {
+                    amount: addAmt,
+                    ts: Date.now()
+                };
+
+                if (fromRequestId && Array.isArray(state.rechargeRequests)) {
+                    const req = state.rechargeRequests.find((r) => r.id === fromRequestId);
+                    if (req) {
+                        req.status = "approved";
+                        req.approvedAt = Date.now();
+                    }
+                }
+
+                state.settings.updatedAt = Date.now() + 5000;
+                writeLocalOnly();
+                const savedOk = await pushToRemote();
+
+                renderAdminPanel();
+                if (!isSpinning && activeMode === "real" && activeUserId === userId) {
+                    updateHUD();
+                    checkRechargeAlertBanner();
+                }
+
+                if (savedOk) {
+                    notifyToast(`Recarga de ${formatMoney(addAmt)} acreditada a ${targetUser.nick}.`, "success");
+                } else {
+                    notifyToast(`Guardado local de ${formatMoney(addAmt)} para ${targetUser.nick}. Reintentando nube...`, "info");
+                    setTimeout(() => pushToRemote(), 1200);
+                }
+
+                if (state.settings.autoOpenUserWa !== false) {
+                    const phoneDigits = cleanPhoneDigits(targetUser.whatsapp);
+                    const waNum = phoneDigits.startsWith("57") ? phoneDigits : (phoneDigits.length === 10 ? `57${phoneDigits}` : phoneDigits);
+                    if (waNum) {
+                        const msg = [
+                            "🎉 *¡RECARGA EXITOSA! — TU APP QUE SÍ TE PAGA*",
+                            `Hola ${targetUser.nick}, tu recarga de *${formatMoney(addAmt)}* ya fue acreditada.`,
+                            `💰 Tu saldo disponible es: *${formatMoney(targetUser.balance)}*.`,
+                            "¡A girar y ganar!"
+                        ].join("\n");
+                        setTimeout(() => {
+                            window.open(`https://wa.me/${waNum}?text=${encodeURIComponent(msg)}`, "_blank", "noopener,noreferrer");
+                        }, 350);
+                    }
+                }
+            }
+
             // ==================== RETIROS 70% / 30% ====================
             function updateWithdrawBreakdown() {
                 const rawAmt = Number(document.getElementById("withdraw-amount").value) || 0;
@@ -1729,7 +1755,7 @@
                 document.getElementById("wd-calc-net").textContent = formatMoney(playerNet);
             }
 
-            // ==================== PANEL ADMIN (CLAVE 1980) ====================
+            // ==================== PANEL ADMIN ====================
             function getPresenceInfo(u) {
                 const now = Date.now();
                 const last = Number((u && (u.lastActiveAt || u.updatedAt)) || 0);
@@ -1776,7 +1802,6 @@
                 const recharges = Array.isArray(state.rechargeRequests) ? state.rechargeRequests : [];
                 const withdrawals = Array.isArray(state.withdrawalRequests) ? state.withdrawalRequests : [];
 
-                // 1. Usuarios en línea y si solicitaron recarga o retiro
                 const onlineBox = document.getElementById("adm-online-requests-list");
                 const onlineUsers = usersArr.filter((u) => getPresenceInfo(u).online);
                 if (!onlineUsers.length) {
@@ -1803,7 +1828,6 @@
                     }).join("");
                 }
 
-                // 2. Solicitudes de Recargas Nequi (Nick, WhatsApp, Valor, PIN, Hora, Estado)
                 const recBox = document.getElementById("adm-recharges-list");
                 if (!recharges.length) {
                     recBox.innerHTML = '<p class="text-white/60">No hay solicitudes de recarga.</p>';
@@ -1821,7 +1845,7 @@
                                         <span class="text-amber-200 font-bold">PIN: ${pinShown}</span>
                                         <span class="text-[10px] font-extrabold px-2 py-0.5 rounded-full ${isPending ? "bg-amber-400/20 text-amber-200" : "bg-emerald-500/20 text-emerald-200"}">${isPending ? "Pendiente" : "Aprobada"}</span>
                                     </div>
-                                    <div class="text-emerald-300 font-extrabold">Valor: ${formatMoney(req.amount)} · 🕒 ${formatTimeStamp(req.createdAt)}</div>
+                                    <div class="text-emerald-300 font-extrabold">Valor: ${formatMoney(req.amount)} · 🕒 ${formatTimeStamp(req.createdAt)}${req.approvedAt ? ` · ✔ ${formatTimeStamp(req.approvedAt)}` : ""}</div>
                                 </div>
                                 ${isPending ? `
                                     <button type="button" data-approve-recharge="${req.id}" class="px-3.5 py-2 rounded-xl bg-emerald-400 hover:bg-emerald-300 text-slate-950 font-black text-xs shrink-0">
@@ -1835,7 +1859,6 @@
                     }).join("");
                 }
 
-                // 3. Solicitudes de Retiro 70% / 30% (Pendiente / Aprobado + Historial Horario)
                 const wdBox = document.getElementById("adm-withdrawals-list");
                 if (!withdrawals.length) {
                     wdBox.innerHTML = '<p class="text-white/60">No hay solicitudes de retiro.</p>';
@@ -1868,7 +1891,6 @@
                     }).join("");
                 }
 
-                // 4. Total Apostado y Balance de Pérdida de Cada Jugador
                 const usrBox = document.getElementById("adm-users-list");
                 if (!usersArr.length) {
                     usrBox.innerHTML = '<p class="text-white/60">Sin jugadores registrados aún.</p>';
@@ -1877,7 +1899,7 @@
                         const pres = getPresenceInfo(u);
                         const wag = Number(u.totalWagered) || 0;
                         const won = Number(u.totalWon) || 0;
-                        const lossBalance = wag - won; // Positivo = pérdida neta del jugador (ganancia de mesa en tiros)
+                        const lossBalance = wag - won;
                         return `
                             <div class="rounded-xl bg-black/45 border border-white/10 p-3 space-y-2">
                                 <div class="flex flex-wrap items-center justify-between gap-2">
@@ -1894,7 +1916,7 @@
                                     <div>Balance Pérdida Jugador: <strong class="${lossBalance >= 0 ? "text-pink-300" : "text-amber-300"}">${lossBalance >= 0 ? formatMoney(lossBalance) + " (perdió)" : "-" + formatMoney(Math.abs(lossBalance)) + " (ganó)"}</strong></div>
                                 </div>
                                 <div class="flex flex-wrap items-center gap-2">
-                                    <input type="number" min="1000" step="1000" value="10000" data-admin-credit-input="${u.id}" class="w-32 px-2.5 py-1.5 rounded-lg bg-slate-900 border border-white/20 text-white font-bold text-xs">
+                                    <input type="number" min="1000" step="1000" value="30000" data-admin-credit-input="${u.id}" class="w-32 px-2.5 py-1.5 rounded-lg bg-slate-900 border border-white/20 text-white font-bold text-xs">
                                     <button type="button" data-admin-credit-btn="${u.id}" class="px-3 py-1.5 rounded-lg bg-emerald-400 hover:bg-emerald-300 text-slate-950 font-black text-xs">
                                         + Acreditar
                                     </button>
@@ -1904,7 +1926,6 @@
                     }).join("");
                 }
 
-                // 5. Configuración
                 document.getElementById("adm-cfg-dburl").value = normalizeDbUrl(state.settings.dbUrl);
                 document.getElementById("adm-cfg-room").value = state.settings.roomCode || DEFAULT_CLOUD_CONFIG.roomCode;
                 document.getElementById("adm-cfg-nequi").value = state.settings.nequiNumber || DEFAULT_CLOUD_CONFIG.nequiNumber;
@@ -1912,55 +1933,6 @@
                 document.getElementById("adm-cfg-pin").value = state.settings.adminPin || DEFAULT_ADMIN_PIN;
                 document.getElementById("adm-cfg-autowa").checked = state.settings.autoOpenUserWa !== false;
                 updateSyncPills();
-            }
-
-            function creditUserBalance(userId, amount, fromRequestId = null) {
-                const u = state.users[userId];
-                const addAmt = Math.round(Number(amount) || 0);
-                if (!u || addAmt <= 0) return;
-
-                u.balance = (Number(u.balance) || 0) + addAmt;
-                if (addAmt >= PROMO_RECHARGE_30K) {
-                    u.has30kRecharge = true;
-                    u.spinsAfter30k = 0;
-                    u.won50Spins30kBonus = false;
-                }
-                u.updatedAt = Date.now();
-                u.rechargeAlert = {
-                    amount: addAmt,
-                    ts: Date.now()
-                };
-
-                if (fromRequestId && Array.isArray(state.rechargeRequests)) {
-                    const req = state.rechargeRequests.find((r) => r.id === fromRequestId);
-                    if (req) {
-                        req.status = "approved";
-                        req.approvedAt = Date.now();
-                    }
-                }
-
-                persistState(true);
-                renderAdminPanel();
-                if (!isSpinning && activeMode === "real" && activeUserId === userId) {
-                    updateHUD();
-                    checkRechargeAlertBanner();
-                }
-
-                notifyToast(`Recarga de ${formatMoney(addAmt)} acreditada a ${u.nick}.`, "success");
-
-                if (state.settings.autoOpenUserWa !== false) {
-                    const phoneDigits = cleanPhoneDigits(u.whatsapp);
-                    const waNum = phoneDigits.startsWith("57") ? phoneDigits : (phoneDigits.length === 10 ? `57${phoneDigits}` : phoneDigits);
-                    if (waNum) {
-                        const msg = [
-                            "🎉 *¡RECARGA EXITOSA! — TU APP QUE SÍ TE PAGA*",
-                            `Hola ${u.nick}, tu recarga de *${formatMoney(addAmt)}* ya fue acreditada.`,
-                            `💰 Tu saldo disponible es: *${formatMoney(u.balance)}*.`,
-                            "¡A girar y ganar!"
-                        ].join("\n");
-                        window.open(`https://wa.me/${waNum}?text=${encodeURIComponent(msg)}`, "_blank", "noopener,noreferrer");
-                    }
-                }
             }
 
             // ==================== INICIALIZACIÓN Y EVENTOS ====================
@@ -2015,8 +1987,7 @@
                     enterWorkspace("demo");
                 });
 
-                // Formulario sencillo: Nick + WhatsApp + PIN de 4 dígitos
-                document.getElementById("player-entry-form").addEventListener("submit", (e) => {
+                document.getElementById("player-entry-form").addEventListener("submit", async (e) => {
                     e.preventDefault();
                     casinoAudio.ensureContext();
                     casinoAudio.sfxClick();
@@ -2032,6 +2003,8 @@
                         return;
                     }
                     errEl.classList.add("hidden");
+
+                    await pullFromRemote();
 
                     const uid = `u_${cleanPhoneDigits(whatsapp)}`;
                     const existing = state.users[uid];
@@ -2078,7 +2051,7 @@
                         };
                     }
 
-                    persistState(true);
+                    await persistState(true);
                     enterWorkspace("real", uid);
                 });
 
@@ -2105,7 +2078,6 @@
                     });
                 });
 
-                // Recarga
                 document.getElementById("btn-open-recharge").addEventListener("click", () => {
                     casinoAudio.ensureContext();
                     casinoAudio.sfxClick();
@@ -2138,7 +2110,7 @@
                     tempInput.remove();
                 });
 
-                document.getElementById("recharge-form").addEventListener("submit", (e) => {
+                document.getElementById("recharge-form").addEventListener("submit", async (e) => {
                     e.preventDefault();
                     const amt = Math.round(Number(document.getElementById("recharge-amount").value) || 0);
                     const fb = document.getElementById("recharge-feedback");
@@ -2149,6 +2121,8 @@
                         fb.classList.remove("hidden");
                         return;
                     }
+
+                    await pullFromRemote();
 
                     const u = getActiveUser();
                     const req = {
@@ -2164,9 +2138,9 @@
                         createdAt: Date.now()
                     };
 
-                    state.rechargeRequests.unshift(req);
+                    state.rechargeRequests = mergeRequestArrays([req], state.rechargeRequests);
                     if (u) u.updatedAt = Date.now();
-                    persistState(true);
+                    await persistState(true);
                     refreshRechargeModalLinks();
 
                     fb.textContent = "¡Solicitud registrada! Envía tu comprobante por WhatsApp al 3106047749 y recuerda esperar 1 minuto y recargar la página.";
@@ -2175,7 +2149,6 @@
                     if (adminUnlocked) renderAdminPanel();
                 });
 
-                // Retiro
                 document.getElementById("btn-open-withdraw").addEventListener("click", () => {
                     casinoAudio.ensureContext();
                     casinoAudio.sfxClick();
@@ -2193,7 +2166,7 @@
 
                 document.getElementById("withdraw-amount").addEventListener("input", updateWithdrawBreakdown);
 
-                document.getElementById("withdraw-form").addEventListener("submit", (e) => {
+                document.getElementById("withdraw-form").addEventListener("submit", async (e) => {
                     e.preventDefault();
                     const fb = document.getElementById("withdraw-feedback");
                     if (activeMode !== "real") {
@@ -2237,7 +2210,7 @@
                     state.settings.totalPaidOutNet = (Number(state.settings.totalPaidOutNet) || 0) + netAmt;
                     state.settings.totalHouseRetained = (Number(state.settings.totalHouseRetained) || 0) + houseAmt;
 
-                    state.withdrawalRequests.unshift({
+                    const wdItem = {
                         id: `wd_${Date.now()}_${Math.floor(Math.random() * 1000)}`,
                         userId: u.id,
                         nick: u.nick,
@@ -2249,9 +2222,10 @@
                         houseAmount: houseAmt,
                         status: "pending",
                         createdAt: Date.now()
-                    });
+                    };
 
-                    persistState(true);
+                    state.withdrawalRequests = mergeRequestArrays([wdItem], state.withdrawalRequests);
+                    await persistState(true);
                     updateHUD();
                     if (adminUnlocked) renderAdminPanel();
 
@@ -2260,68 +2234,78 @@
                     fb.classList.remove("hidden");
                 });
 
-                // Admin
-                document.getElementById("btn-open-admin").addEventListener("click", () => {
+                document.getElementById("btn-open-admin").addEventListener("click", async () => {
                     casinoAudio.ensureContext();
                     casinoAudio.sfxClick();
                     document.getElementById("admin-pin-error").classList.add("hidden");
                     document.getElementById("admin-pin-input").value = "";
-                    renderAdminPanel();
                     document.getElementById("modal-admin").classList.remove("hidden");
+                    await pullFromRemote();
+                    renderAdminPanel();
                 });
 
-                document.getElementById("admin-pin-form").addEventListener("submit", (e) => {
+                document.getElementById("admin-pin-form").addEventListener("submit", async (e) => {
                     e.preventDefault();
                     const entered = (document.getElementById("admin-pin-input").value || "").trim();
                     const expected = String(state.settings.adminPin || DEFAULT_ADMIN_PIN).trim();
                     if (entered === expected) {
                         adminUnlocked = true;
                         document.getElementById("admin-pin-error").classList.add("hidden");
+                        await pullFromRemote();
                         renderAdminPanel();
                     } else {
                         document.getElementById("admin-pin-error").classList.remove("hidden");
                     }
                 });
 
-                document.getElementById("adm-recharges-list").addEventListener("click", (e) => {
+                document.getElementById("adm-recharges-list").addEventListener("click", async (e) => {
                     const btn = e.target.closest("[data-approve-recharge]");
                     if (!btn) return;
+                    btn.disabled = true;
                     const reqId = btn.getAttribute("data-approve-recharge");
                     const req = (state.rechargeRequests || []).find((r) => r.id === reqId);
-                    if (!req) return;
+                    if (!req) {
+                        btn.disabled = false;
+                        return;
+                    }
                     if (req.userId === "demo") {
                         req.status = "approved";
                         req.approvedAt = Date.now();
-                        persistState(true);
+                        await persistState(true);
                         renderAdminPanel();
                         return;
                     }
-                    creditUserBalance(req.userId, req.amount, req.id);
+                    await creditUserBalance(req.userId, req.amount, req.id);
                 });
 
-                document.getElementById("adm-withdrawals-list").addEventListener("click", (e) => {
+                document.getElementById("adm-withdrawals-list").addEventListener("click", async (e) => {
                     const btn = e.target.closest("[data-approve-withdraw]");
                     if (!btn) return;
+                    btn.disabled = true;
                     const wdId = btn.getAttribute("data-approve-withdraw");
                     const wd = (state.withdrawalRequests || []).find((w) => w.id === wdId);
-                    if (!wd) return;
+                    if (!wd) {
+                        btn.disabled = false;
+                        return;
+                    }
                     wd.status = "approved";
                     wd.approvedAt = Date.now();
-                    persistState(true);
+                    await persistState(true);
                     renderAdminPanel();
                     notifyToast(`Retiro de ${formatMoney(wd.netAmount)} marcado como Aprobado.`, "success");
                 });
 
-                document.getElementById("adm-users-list").addEventListener("click", (e) => {
+                document.getElementById("adm-users-list").addEventListener("click", async (e) => {
                     const btn = e.target.closest("[data-admin-credit-btn]");
                     if (!btn) return;
+                    btn.disabled = true;
                     const uid = btn.getAttribute("data-admin-credit-btn");
                     const inp = document.querySelector(`[data-admin-credit-input="${uid}"]`);
                     const amt = inp ? Number(inp.value) : 0;
-                    creditUserBalance(uid, amt, null);
+                    await creditUserBalance(uid, amt, null);
                 });
 
-                document.getElementById("btn-adm-save-cfg").addEventListener("click", () => {
+                document.getElementById("btn-adm-save-cfg").addEventListener("click", async () => {
                     state.settings.dbUrl = normalizeDbUrl(document.getElementById("adm-cfg-dburl").value);
                     state.settings.roomCode = (document.getElementById("adm-cfg-room").value || DEFAULT_CLOUD_CONFIG.roomCode).trim();
                     state.settings.nequiNumber = (document.getElementById("adm-cfg-nequi").value || DEFAULT_CLOUD_CONFIG.nequiNumber).trim();
@@ -2329,15 +2313,15 @@
                     const newPin = (document.getElementById("adm-cfg-pin").value || "").trim();
                     if (newPin.length >= 4) state.settings.adminPin = newPin;
                     state.settings.autoOpenUserWa = Boolean(document.getElementById("adm-cfg-autowa").checked);
-                    persistState(true);
-                    pullFromRemote();
+                    await persistState(true);
+                    await pullFromRemote();
                     renderAdminPanel();
                     notifyToast("Configuración guardada.", "success");
                 });
 
-                document.getElementById("btn-adm-sync-now").addEventListener("click", () => {
-                    pullFromRemote();
-                    notifyToast("Sincronizando sala...", "info");
+                document.getElementById("btn-adm-sync-now").addEventListener("click", async () => {
+                    await pullFromRemote();
+                    notifyToast("Sala sincronizada.", "info");
                 });
 
                 window.addEventListener("storage", (e) => {
@@ -2351,7 +2335,6 @@
                 });
             }
 
-            // ==================== ARRANQUE CON PANEL DE CARGA ====================
             window.addEventListener("DOMContentLoaded", async () => {
                 const bar = document.getElementById("loading-bar");
                 const statusTxt = document.getElementById("loading-status-text");
@@ -2377,6 +2360,7 @@
                         document.getElementById("loading-screen").classList.add("hidden");
                         document.getElementById("app-shell").classList.remove("hidden");
                         drawSlotCanvas(currentGrid, []);
+                        if (activeMode === "real") checkRechargeAlertBanner();
                     }, 420);
 
                     casinoAudio.startLoop();
@@ -2390,16 +2374,18 @@
                         });
                     }, 480);
 
-                    setInterval(() => {
+                    setInterval(async () => {
+                        if (isSpinning || isSyncingNow) return;
                         const u = getActiveUser();
                         if (activeMode === "real" && u) {
                             u.online = true;
-                            u.isSpinning = isSpinning;
+                            u.isSpinning = false;
                             u.lastActiveAt = Date.now();
                             u.updatedAt = Date.now();
-                            persistState(true);
+                            await persistState(true);
+                        } else {
+                            await pullFromRemote();
                         }
-                        pullFromRemote();
                     }, 4000);
                 } catch (err) {
                     document.getElementById("loading-screen").classList.add("hidden");
