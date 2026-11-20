@@ -652,6 +652,17 @@
                 return String(phone || "").replace(/\D+/g, "");
             }
 
+            function normalizeDbUrl(urlVal) {
+                const cleaned = String(urlVal || "")
+                    .trim()
+                    .replace(/\/+$/, "")
+                    .toLowerCase();
+                if (!cleaned || cleaned.includes("tu-proyecto")) {
+                    return DEFAULT_CLOUD_CONFIG.dbUrl;
+                }
+                return cleaned;
+            }
+
             function notifyToast(message, type = "info") {
                 try {
                     const container = document.getElementById("toast-container");
@@ -772,7 +783,7 @@
                         gain.gain.linearRampToValueAtTime(0.06, now + 0.08);
                         gain.gain.exponentialRampToValueAtTime(0.0008, now + duration);
 
-                        osc.connect(gain);
+                        osc.connect(filter);
                         gain.connect(filter);
                         osc.start(now);
                         osc.stop(now + duration + 0.05);
@@ -977,8 +988,10 @@
                     const raw = localStorage.getItem(getRoomStorageKey(savedRoom));
                     if (!raw) return fallback;
                     const parsed = JSON.parse(raw);
+                    const mergedSettings = { ...fallback.settings, ...(parsed.settings || {}) };
+                    mergedSettings.dbUrl = normalizeDbUrl(mergedSettings.dbUrl);
                     return {
-                        settings: { ...fallback.settings, ...(parsed.settings || {}) },
+                        settings: mergedSettings,
                         users: parsed.users && typeof parsed.users === "object" ? parsed.users : {},
                         rechargeRequests: Array.isArray(parsed.rechargeRequests) ? parsed.rechargeRequests : [],
                         withdrawalRequests: Array.isArray(parsed.withdrawalRequests) ? parsed.withdrawalRequests : []
@@ -1000,6 +1013,7 @@
 
             function persistState(pushRemote = true) {
                 try {
+                    state.settings.dbUrl = normalizeDbUrl(state.settings.dbUrl);
                     state.settings.updatedAt = Date.now();
                     const room = (state.settings.roomCode || DEFAULT_CLOUD_CONFIG.roomCode).trim();
                     localStorage.setItem("EL_PROXIMO_GANADOR_ACTIVE_ROOM", room);
@@ -1012,10 +1026,7 @@
 
             // ==================== SINCRONIZACIÓN REMOTA (FIREBASE REALTIME DB + LOCAL) ====================
             function getRemoteDatabaseEndpoint() {
-                const rawUrl = String((state.settings && state.settings.dbUrl) || DEFAULT_CLOUD_CONFIG.dbUrl || "")
-                    .trim()
-                    .replace(/\/+$/, "")
-                    .toLowerCase();
+                const rawUrl = normalizeDbUrl(state.settings && state.settings.dbUrl);
                 if (!rawUrl || rawUrl.includes("tu-proyecto")) return null;
                 const room = encodeURIComponent((state.settings.roomCode || DEFAULT_CLOUD_CONFIG.roomCode).trim());
                 if (rawUrl.includes("firebaseio.com") || rawUrl.includes("firebasedatabase.app")) {
@@ -1072,7 +1083,7 @@
                         state.settings = {
                             ...state.settings,
                             ...remoteData.settings,
-                            dbUrl: state.settings.dbUrl || remoteData.settings.dbUrl || DEFAULT_CLOUD_CONFIG.dbUrl
+                            dbUrl: normalizeDbUrl(remoteData.settings.dbUrl || state.settings.dbUrl)
                         };
                     }
                     if (remoteData.users && typeof remoteData.users === "object") {
@@ -1782,7 +1793,7 @@
                 }
 
                 // Campos de configuración
-                document.getElementById("adm-cfg-dburl").value = state.settings.dbUrl || DEFAULT_CLOUD_CONFIG.dbUrl;
+                document.getElementById("adm-cfg-dburl").value = normalizeDbUrl(state.settings.dbUrl);
                 document.getElementById("adm-cfg-room").value = state.settings.roomCode || DEFAULT_CLOUD_CONFIG.roomCode;
                 document.getElementById("adm-cfg-nequi").value = state.settings.nequiNumber || DEFAULT_CLOUD_CONFIG.nequiNumber;
                 document.getElementById("adm-cfg-wa-admin").value = state.settings.whatsappAdmin || DEFAULT_CLOUD_CONFIG.whatsappAdmin;
@@ -2219,11 +2230,8 @@
                 });
 
                 document.getElementById("btn-adm-save-cfg").addEventListener("click", () => {
-                    const cleanedUrl = String(document.getElementById("adm-cfg-dburl").value || DEFAULT_CLOUD_CONFIG.dbUrl)
-                        .trim()
-                        .replace(/\/+$/, "")
-                        .toLowerCase();
-                    state.settings.dbUrl = cleanedUrl || DEFAULT_CLOUD_CONFIG.dbUrl;
+                    const cleanedUrl = normalizeDbUrl(document.getElementById("adm-cfg-dburl").value);
+                    state.settings.dbUrl = cleanedUrl;
                     state.settings.roomCode = (document.getElementById("adm-cfg-room").value || DEFAULT_CLOUD_CONFIG.roomCode).trim();
                     state.settings.nequiNumber = (document.getElementById("adm-cfg-nequi").value || DEFAULT_CLOUD_CONFIG.nequiNumber).trim();
                     state.settings.whatsappAdmin = (document.getElementById("adm-cfg-wa-admin").value || DEFAULT_CLOUD_CONFIG.whatsappAdmin).trim();
