@@ -397,7 +397,7 @@
             </div>
 
             <div class="rounded-2xl bg-amber-400/15 border border-amber-300/50 px-3.5 py-2.5 text-xs font-extrabold text-amber-200">
-                ⏱️ NOTA MUY IMPORTANTE: Cuando te aprueben la recarga, toca <strong>🔄 Actualizar Saldo</strong> o espera 1 minuto y recarga la página.
+                ⚡ Cuando aprueben tu recarga, te llega sola en unos 5 a 10 segundos sin recargar la página.
             </div>
 
             <form id="recharge-form" class="space-y-3">
@@ -577,12 +577,6 @@
                         <div>
                             <label for="adm-cfg-pin" class="block font-bold text-amber-200 mb-1">Clave del Admin</label>
                             <input id="adm-cfg-pin" type="password" class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-white/20 text-white">
-                        </div>
-                        <div class="flex items-end">
-                            <label class="flex items-center gap-2 font-bold text-emerald-200 cursor-pointer py-2">
-                                <input id="adm-cfg-autowa" type="checkbox" class="w-4 h-4 accent-emerald-400">
-                                <span>Abrir WhatsApp del jugador al aprobar recarga</span>
-                            </label>
                         </div>
                     </div>
                     <p id="adm-online-conn-detail" class="text-[11px] text-cyan-200/85"></p>
@@ -988,7 +982,6 @@
                         nequiNumber: DEFAULT_CLOUD_CONFIG.nequiNumber,
                         whatsappAdmin: DEFAULT_CLOUD_CONFIG.whatsappAdmin,
                         adminPin: DEFAULT_ADMIN_PIN,
-                        autoOpenUserWa: true,
                         totalWagered: 0,
                         totalWon: 0,
                         totalPaidOutNet: 0,
@@ -1149,6 +1142,7 @@
             function mergeRemoteData(remoteData) {
                 try {
                     if (!remoteData || typeof remoteData !== "object") return;
+                    const prevBalance = activeMode === "real" ? getCurrentBalance() : 0;
 
                     if (remoteData.settings) {
                         state.settings = {
@@ -1206,6 +1200,10 @@
                     if (!isSpinning && activeMode) {
                         updateHUD();
                         checkRechargeAlertBanner();
+                        const newBalance = activeMode === "real" ? getCurrentBalance() : 0;
+                        if (activeMode === "real" && newBalance > prevBalance) {
+                            notifyToast(`¡Recarga recibida! Nuevo saldo: ${formatMoney(newBalance)}`, "success");
+                        }
                     }
                     if (adminUnlocked) {
                         renderAdminPanel();
@@ -1765,25 +1763,9 @@
                 }
 
                 if (savedOk) {
-                    notifyToast(`Recarga de ${formatMoney(addAmt)} acreditada a ${targetUser.nick}.`, "success");
+                    notifyToast(`Recarga de ${formatMoney(addAmt)} aprobada para ${targetUser.nick}.`, "success");
                 } else {
                     notifyToast(`Guardado local de ${formatMoney(addAmt)} para ${targetUser.nick}.`, "info");
-                }
-
-                if (state.settings.autoOpenUserWa !== false) {
-                    const phoneDigits = cleanPhoneDigits(targetUser.whatsapp);
-                    const waNum = phoneDigits.startsWith("57") ? phoneDigits : (phoneDigits.length === 10 ? `57${phoneDigits}` : phoneDigits);
-                    if (waNum) {
-                        const msg = [
-                            "🎉 *¡RECARGA EXITOSA! — TU APP QUE SÍ TE PAGA*",
-                            `Hola ${targetUser.nick}, tu recarga de *${formatMoney(addAmt)}* ya fue acreditada.`,
-                            `💰 Tu saldo disponible es: *${formatMoney(targetUser.balance)}*.`,
-                            "¡A girar y ganar!"
-                        ].join("\n");
-                        setTimeout(() => {
-                            window.open(`https://wa.me/${waNum}?text=${encodeURIComponent(msg)}`, "_blank", "noopener,noreferrer");
-                        }, 350);
-                    }
                 }
             }
 
@@ -1904,7 +1886,7 @@
                                 </div>
                                 ${isPending ? `
                                     <button type="button" data-approve-recharge="${req.id}" class="px-3.5 py-2 rounded-xl bg-emerald-400 hover:bg-emerald-300 text-slate-950 font-black text-xs shrink-0">
-                                        ✅ Acreditar
+                                        ✅ Aprobar
                                     </button>
                                 ` : `
                                     <span class="text-emerald-300 font-bold text-xs shrink-0">✔ Aprobada</span>
@@ -1986,7 +1968,6 @@
                 document.getElementById("adm-cfg-nequi").value = state.settings.nequiNumber || DEFAULT_CLOUD_CONFIG.nequiNumber;
                 document.getElementById("adm-cfg-wa-admin").value = state.settings.whatsappAdmin || DEFAULT_CLOUD_CONFIG.whatsappAdmin;
                 document.getElementById("adm-cfg-pin").value = state.settings.adminPin || DEFAULT_ADMIN_PIN;
-                document.getElementById("adm-cfg-autowa").checked = state.settings.autoOpenUserWa !== false;
                 updateSyncPills();
             }
 
@@ -2217,7 +2198,7 @@
                     await persistState(true);
                     refreshRechargeModalLinks();
 
-                    fb.textContent = "¡Solicitud registrada! Envía tu comprobante por WhatsApp al 3106047749 y toca Actualizar Saldo cuando te aprueben.";
+                    fb.textContent = "¡Solicitud enviada! En cuanto la aprueben te llega sola en unos 5 a 10 segundos.";
                     fb.className = "rounded-xl px-3.5 py-2 text-xs font-bold bg-emerald-500/25 text-emerald-200 border border-emerald-400/40";
                     fb.classList.remove("hidden");
                     if (adminUnlocked) renderAdminPanel();
@@ -2390,7 +2371,6 @@
                     state.settings.whatsappAdmin = (document.getElementById("adm-cfg-wa-admin").value || DEFAULT_CLOUD_CONFIG.whatsappAdmin).trim();
                     const newPin = (document.getElementById("adm-cfg-pin").value || "").trim();
                     if (newPin.length >= 4) state.settings.adminPin = newPin;
-                    state.settings.autoOpenUserWa = Boolean(document.getElementById("adm-cfg-autowa").checked);
                     await persistState(true);
                     await pullFromRemote();
                     renderAdminPanel();
@@ -2453,6 +2433,7 @@
                         });
                     }, 550);
 
+                    // Consulta cada 5 segundos en silencio para que recargas aprobadas lleguen en ~5-10s sin recargar la página
                     setInterval(async () => {
                         if (isSpinning || isSyncingNow) return;
                         if (activeMode === "real") {
@@ -2461,13 +2442,10 @@
                                 u.online = true;
                                 u.isSpinning = false;
                                 u.lastActiveAt = Date.now();
-                                u.updatedAt = Date.now();
                             }
-                            await persistState(true);
-                        } else {
-                            await pullFromRemote();
                         }
-                    }, 25000);
+                        await pullFromRemote();
+                    }, 5000);
                 } catch (err) {
                     document.getElementById("loading-screen").classList.add("hidden");
                     document.getElementById("app-shell").classList.remove("hidden");
