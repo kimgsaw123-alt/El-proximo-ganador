@@ -141,7 +141,7 @@
                     CARGANDO LA PARTIDA...
                 </h2>
                 <p id="loading-status-text" class="text-xs sm:text-sm text-fuchsia-100/85">
-                    Conectando con la nube y verificando el estado de la sala.
+                    Conectando con Firebase y verificando tu saldo.
                 </p>
             </div>
             <div class="w-full h-3 rounded-full bg-black/50 border border-white/15 overflow-hidden p-0.5">
@@ -174,7 +174,7 @@
             </div>
         </div>
 
-        <!-- BARRA SUPERIOR CON TÍTULO PRINCIPAL "TU APP QUE SÍ TE PAGA", SEMÁFORO ROJO/VERDE, SALA Y MÚSICA -->
+        <!-- BARRA SUPERIOR CON TÍTULO PRINCIPAL "TU APP QUE SÍ TE PAGA", SALA Y MÚSICA -->
         <header class="rounded-3xl bg-white/10 backdrop-blur-md border border-white/20 p-3.5 sm:p-4 shadow-2xl">
             <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
                 <div class="space-y-1.5">
@@ -190,16 +190,11 @@
 
                     <div class="flex items-center flex-wrap gap-2">
                         <span id="pill-sync" class="text-[11px] font-bold px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-200 border border-emerald-400/35">
-                            ● En línea (Nube)
+                            En línea (Firebase)
                         </span>
 
                         <span id="pill-room" class="text-[11px] font-bold px-2.5 py-1 rounded-full bg-cyan-500/20 text-cyan-200 border border-cyan-300/35">
                             🌐 Sala: MESA_VIP_01
-                        </span>
-
-                        <span id="pill-recharge-traffic" class="inline-flex items-center gap-1.5 text-[11px] font-extrabold px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-200 border border-emerald-400/40">
-                            <span id="traffic-dot" class="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399]"></span>
-                            <span id="traffic-label">Listo para acreditar</span>
                         </span>
 
                         <span id="pill-player" class="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-white/10 text-amber-100 border border-white/15">
@@ -213,7 +208,7 @@
                         <span id="music-icon">🎶</span>
                         <span id="music-label">Casino Audio: Activo</span>
                     </button>
-                    <button type="button" id="btn-music-groove" class="px-3 py-2 rounded-xl bg-gradient-to-r from-cyan-500/25 to-amber-500/25 hover:brightness-110 border border-cyan-300/40 text-cyan-100 font-bold text-xs transition">
+                    <button type="button" id="btn-music-groove" class="px-3.5 py-2 rounded-xl bg-gradient-to-r from-cyan-500/25 to-amber-500/25 hover:brightness-110 border border-cyan-300/40 text-cyan-100 font-bold text-xs transition">
                         🎹 Estilo: Vegas Groove
                     </button>
                     <label class="hidden sm:flex items-center gap-1.5 px-2.5 py-2 rounded-xl bg-black/35 border border-white/15 text-[11px] font-semibold text-amber-100">
@@ -292,12 +287,17 @@
             <section class="lg:col-span-8 slot-cabinet rounded-3xl p-3.5 sm:p-5 space-y-3.5">
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
                     <div class="rounded-2xl bg-black/45 border border-amber-300/35 p-3">
-                        <div class="text-[11px] uppercase font-bold text-amber-200/85">Saldo Disponible</div>
-                        <div id="hud-balance" class="font-display text-2xl sm:text-3xl font-bold text-yellow-300">$0</div>
+                        <div class="flex items-center justify-between gap-1.5">
+                            <span class="text-[11px] uppercase font-bold text-amber-200/85">Saldo Disponible</span>
+                            <button type="button" id="btn-refresh-balance" class="px-2 py-0.5 rounded-lg bg-cyan-400/20 hover:bg-cyan-400/35 border border-cyan-300/40 text-cyan-200 font-extrabold text-[10px] transition">
+                                🔄 Actualizar Saldo
+                            </button>
+                        </div>
+                        <div id="hud-balance" class="font-display text-2xl sm:text-3xl font-bold text-yellow-300 mt-0.5">$0</div>
                     </div>
                     <div class="rounded-2xl bg-black/45 border border-cyan-300/35 p-3">
                         <div class="text-[11px] uppercase font-bold text-cyan-200/85">Último Premio</div>
-                        <div id="hud-last-win" class="font-display text-2xl sm:text-3xl font-bold text-cyan-300">$0</div>
+                        <div id="hud-last-win" class="font-display text-2xl sm:text-3xl font-bold text-cyan-300 mt-0.5">$0</div>
                     </div>
                     <div class="rounded-2xl bg-black/45 border border-pink-300/35 p-3 flex flex-col justify-center">
                         <div class="flex items-center gap-2">
@@ -397,7 +397,7 @@
             </div>
 
             <div class="rounded-2xl bg-amber-400/15 border border-amber-300/50 px-3.5 py-2.5 text-xs font-extrabold text-amber-200">
-                ⏱️ NOTA MUY IMPORTANTE: Espera <strong>1 minuto</strong> y <strong>recarga la página</strong> para que aparezca tu saldo acreditado.
+                ⏱️ NOTA MUY IMPORTANTE: Cuando te aprueben la recarga, toca <strong>🔄 Actualizar Saldo</strong> o espera 1 minuto y recarga la página.
             </div>
 
             <form id="recharge-form" class="space-y-3">
@@ -481,12 +481,17 @@
     <!-- MODAL PANEL ADMINISTRADOR (CLAVE 1980) -->
     <div id="modal-admin" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-md p-3 sm:p-5 flex items-center justify-center overflow-y-auto">
         <div class="w-full max-w-6xl rounded-3xl bg-slate-950 border-2 border-amber-300/50 p-4 sm:p-6 space-y-5 max-h-[92vh] overflow-y-auto shadow-2xl">
-            <div class="flex items-center justify-between border-b border-white/10 pb-3">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-white/10 pb-3">
                 <div>
                     <h3 class="font-display text-xl sm:text-2xl font-bold text-amber-300">🔐 Panel de Administración — TU APP QUE SÍ TE PAGA</h3>
-                    <p class="text-xs text-white/65">Métricas diarias/semanales, recargas Nequi, retiros 70/30 con hora, usuarios en línea y configuración.</p>
+                    <p class="text-xs text-white/65">Métricas diarias/semanales, recargas Nequi, retiros 70/30 con hora, usuarios en línea y limpieza de historial.</p>
                 </div>
-                <button type="button" data-close-modal="modal-admin" class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 text-white font-bold">✕</button>
+                <div class="flex items-center gap-2">
+                    <button type="button" id="btn-adm-clear-history" class="px-3 py-2 rounded-xl bg-rose-500/20 hover:bg-rose-500/35 border border-rose-400/45 text-rose-200 font-extrabold text-xs">
+                        🧹 Limpiar Historial
+                    </button>
+                    <button type="button" data-close-modal="modal-admin" class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 text-white font-bold">✕</button>
+                </div>
             </div>
 
             <div id="admin-lock-view" class="max-w-sm mx-auto py-6 space-y-4 text-center">
@@ -531,7 +536,7 @@
                 </div>
 
                 <div class="rounded-2xl bg-white/5 border border-emerald-400/30 p-4 space-y-2.5">
-                    <h4 class="font-display text-base font-bold text-emerald-300">🟢 Usuarios en Línea y Solicitudes Activas (Recarga / Retiro)</h4>
+                    <h4 class="font-display text-base font-bold text-emerald-300">Usuarios en Línea y Solicitudes Activas (Recarga / Retiro)</h4>
                     <div id="adm-online-requests-list" class="space-y-2 max-h-56 overflow-y-auto text-xs"></div>
                 </div>
 
@@ -613,7 +618,6 @@
             const PROMO_RECHARGE_30K = 30000;
             const MIN_WITHDRAW = 30000;
             const MAX_WITHDRAW = 100000;
-            const PLAYER_PAYOUT_SHARE = 0.70;
             const HOUSE_RETENTION_SHARE = 0.30;
             const DEFAULT_ADMIN_PIN = "1980";
 
@@ -655,8 +659,8 @@
             }
 
             function normalizeDbUrl(urlVal) {
-                const cleaned = String(urlVal || "").trim().replace(/\/+$/, "").toLowerCase();
-                if (!cleaned || cleaned.includes("tu-proyecto")) {
+                const cleaned = String(urlVal || "").trim().replace(/\/+$/, "");
+                if (!cleaned || cleaned.toLowerCase().includes("tu-proyecto")) {
                     return DEFAULT_CLOUD_CONFIG.dbUrl;
                 }
                 return cleaned;
@@ -1028,23 +1032,6 @@
             let adminUnlocked = false;
             let remoteConnected = false;
 
-            function setRechargeTrafficState(isBusyOrRed) {
-                const dot = document.getElementById("traffic-dot");
-                const lbl = document.getElementById("traffic-label");
-                const box = document.getElementById("pill-recharge-traffic");
-                if (!dot || !lbl || !box) return;
-
-                if (isBusyOrRed) {
-                    dot.className = "w-2.5 h-2.5 rounded-full bg-rose-500 shadow-[0_0_10px_#f43f5e] animate-ping";
-                    lbl.textContent = "Sincronizando (No acreditar aún)";
-                    box.className = "inline-flex items-center gap-1.5 text-[11px] font-extrabold px-2.5 py-1 rounded-full bg-rose-500/20 text-rose-200 border border-rose-400/50";
-                } else {
-                    dot.className = "w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_10px_#34d399]";
-                    lbl.textContent = "Listo para acreditar";
-                    box.className = "inline-flex items-center gap-1.5 text-[11px] font-extrabold px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-200 border border-emerald-400/45";
-                }
-            }
-
             function writeLocalOnly() {
                 try {
                     state.settings.dbUrl = normalizeDbUrl(state.settings.dbUrl);
@@ -1063,10 +1050,10 @@
                 return Promise.resolve(true);
             }
 
-            // ==================== SINCRONIZACIÓN REMOTA SIN PISAR APROBACIONES ====================
+            // ==================== SINCRONIZACIÓN FIREBASE Y CRÉDITOS SEGUROS ====================
             function getRemoteDatabaseEndpoint() {
                 const rawUrl = normalizeDbUrl(state.settings && state.settings.dbUrl);
-                if (!rawUrl || rawUrl.includes("tu-proyecto")) return null;
+                if (!rawUrl) return null;
                 const room = encodeURIComponent((state.settings.roomCode || DEFAULT_CLOUD_CONFIG.roomCode).trim());
                 if (rawUrl.includes("firebaseio.com") || rawUrl.includes("firebasedatabase.app")) {
                     return `${rawUrl}/tu_app_que_si_te_paga/${room}.json`;
@@ -1085,16 +1072,51 @@
 
                 if (endpoint && remoteConnected) {
                     if (pillSync) {
-                        pillSync.textContent = "● En línea (Nube)";
+                        pillSync.textContent = "En línea (Firebase)";
                         pillSync.className = "text-[11px] font-bold px-2.5 py-1 rounded-full bg-emerald-500/25 text-emerald-200 border border-emerald-400/40";
                     }
-                    if (detailEl) detailEl.textContent = `Conectado a Firebase Realtime Database en la sala "${room}".`;
+                    if (detailEl) detailEl.textContent = `Conectado a Firebase (${endpoint}).`;
                 } else if (endpoint) {
                     if (pillSync) {
-                        pillSync.textContent = "● En línea (Nube)";
-                        pillSync.className = "text-[11px] font-bold px-2.5 py-1 rounded-full bg-amber-500/20 text-amber-200 border border-amber-300/35";
+                        pillSync.textContent = "En línea (Firebase)";
+                        pillSync.className = "text-[11px] font-bold px-2.5 py-1 rounded-full bg-cyan-500/20 text-cyan-200 border border-cyan-300/35";
+                    }
+                    if (detailEl) detailEl.textContent = `Base configurada: ${DEFAULT_CLOUD_CONFIG.dbUrl} · Sala: ${room}.`;
+                }
+            }
+
+            function applyPendingApprovedCreditsToUser(userObj) {
+                if (!userObj || !userObj.id) return false;
+                userObj.appliedCreditIds = Array.isArray(userObj.appliedCreditIds) ? userObj.appliedCreditIds : [];
+                let changed = false;
+
+                const approvedRecharges = (state.rechargeRequests || []).filter(
+                    (r) => r.userId === userObj.id && r.status === "approved" && r.creditId
+                );
+
+                for (const req of approvedRecharges) {
+                    if (!userObj.appliedCreditIds.includes(req.creditId)) {
+                        const amt = Math.round(Number(req.amount) || 0);
+                        if (amt > 0) {
+                            userObj.balance = (Number(userObj.balance) || 0) + amt;
+                            userObj.appliedCreditIds.push(req.creditId);
+                            if (amt >= PROMO_RECHARGE_30K) {
+                                userObj.has30kRecharge = true;
+                                userObj.spinsAfter30k = 0;
+                                userObj.won50Spins30kBonus = false;
+                            }
+                            userObj.rechargeAlert = {
+                                amount: amt,
+                                creditId: req.creditId,
+                                ts: Number(req.approvedAt || Date.now())
+                            };
+                            userObj.updatedAt = Date.now();
+                            changed = true;
+                        }
                     }
                 }
+
+                return changed;
             }
 
             function mergeRequestArrays(localArr, remoteArr) {
@@ -1106,7 +1128,6 @@
                         map.set(item.id, { ...item });
                         return;
                     }
-                    // Si cualquiera de los dos está aprobado, gana "approved" para que nunca vuelva a "pending"
                     const approved = prev.status === "approved" || item.status === "approved";
                     const pTs = Number(prev.approvedAt || prev.createdAt || 0);
                     const iTs = Number(item.approvedAt || item.createdAt || 0);
@@ -1114,6 +1135,7 @@
                     if (approved) {
                         base.status = "approved";
                         base.approvedAt = Math.max(Number(prev.approvedAt || 0), Number(item.approvedAt || 0), Date.now());
+                        base.creditId = base.creditId || prev.creditId || item.creditId || `cred_${base.id}`;
                     }
                     map.set(item.id, base);
                 };
@@ -1132,7 +1154,7 @@
                         state.settings = {
                             ...state.settings,
                             ...remoteData.settings,
-                            dbUrl: normalizeDbUrl(remoteData.settings.dbUrl || state.settings.dbUrl),
+                            dbUrl: DEFAULT_CLOUD_CONFIG.dbUrl,
                             totalWagered: Math.max(Number(state.settings.totalWagered) || 0, Number(remoteData.settings.totalWagered) || 0),
                             totalWon: Math.max(Number(state.settings.totalWon) || 0, Number(remoteData.settings.totalWon) || 0),
                             totalPaidOutNet: Math.max(Number(state.settings.totalPaidOutNet) || 0, Number(remoteData.settings.totalPaidOutNet) || 0),
@@ -1140,35 +1162,43 @@
                         };
                     }
 
+                    state.rechargeRequests = mergeRequestArrays(state.rechargeRequests, remoteData.rechargeRequests);
+                    state.withdrawalRequests = mergeRequestArrays(state.withdrawalRequests, remoteData.withdrawalRequests);
+
                     if (remoteData.users && typeof remoteData.users === "object") {
                         Object.keys(remoteData.users).forEach((uid) => {
                             const ru = remoteData.users[uid];
                             const lu = state.users[uid];
                             if (!lu) {
                                 state.users[uid] = { ...ru };
-                                return;
-                            }
-                            const rTime = Number(ru.updatedAt || ru.lastActiveAt || 0);
-                            const lTime = Number(lu.updatedAt || lu.lastActiveAt || 0);
-                            const mergedUser = rTime >= lTime ? { ...lu, ...ru } : { ...ru, ...lu };
+                            } else {
+                                const rTime = Number(ru.updatedAt || ru.lastActiveAt || 0);
+                                const lTime = Number(lu.updatedAt || lu.lastActiveAt || 0);
+                                const mergedUser = rTime >= lTime ? { ...lu, ...ru } : { ...ru, ...lu };
 
-                            // Si en la nube o en local llegó una alerta de recarga reciente, conservarla hasta que se descarte
-                            const rAlertTs = Number(ru.rechargeAlert && ru.rechargeAlert.ts ? ru.rechargeAlert.ts : 0);
-                            const lAlertTs = Number(lu.rechargeAlert && lu.rechargeAlert.ts ? lu.rechargeAlert.ts : 0);
-                            if (rAlertTs > lAlertTs) {
-                                mergedUser.rechargeAlert = ru.rechargeAlert;
-                                mergedUser.balance = Math.max(Number(lu.balance) || 0, Number(ru.balance) || 0);
-                            } else if (lAlertTs > rAlertTs) {
-                                mergedUser.rechargeAlert = lu.rechargeAlert;
-                                mergedUser.balance = Math.max(Number(lu.balance) || 0, Number(ru.balance) || 0);
-                            }
+                                const mergedCredits = new Set([
+                                    ...(Array.isArray(lu.appliedCreditIds) ? lu.appliedCreditIds : []),
+                                    ...(Array.isArray(ru.appliedCreditIds) ? ru.appliedCreditIds : [])
+                                ]);
+                                mergedUser.appliedCreditIds = Array.from(mergedCredits);
 
-                            state.users[uid] = mergedUser;
+                                const rAlertTs = Number(ru.rechargeAlert && ru.rechargeAlert.ts ? ru.rechargeAlert.ts : 0);
+                                const lAlertTs = Number(lu.rechargeAlert && lu.rechargeAlert.ts ? lu.rechargeAlert.ts : 0);
+                                if (rAlertTs > lAlertTs) {
+                                    mergedUser.rechargeAlert = ru.rechargeAlert;
+                                } else if (lAlertTs > rAlertTs) {
+                                    mergedUser.rechargeAlert = lu.rechargeAlert;
+                                }
+
+                                state.users[uid] = mergedUser;
+                            }
+                            applyPendingApprovedCreditsToUser(state.users[uid]);
                         });
                     }
 
-                    state.rechargeRequests = mergeRequestArrays(state.rechargeRequests, remoteData.rechargeRequests);
-                    state.withdrawalRequests = mergeRequestArrays(state.withdrawalRequests, remoteData.withdrawalRequests);
+                    Object.keys(state.users).forEach((uid) => {
+                        applyPendingApprovedCreditsToUser(state.users[uid]);
+                    });
 
                     writeLocalOnly();
                     updateSyncPills();
@@ -1184,8 +1214,8 @@
             }
 
             async function pushToRemote() {
+                if (isSyncingNow) return remoteConnected;
                 isSyncingNow = true;
-                setRechargeTrafficState(true);
                 try {
                     const url = getRemoteDatabaseEndpoint();
                     if (!url) {
@@ -1207,13 +1237,12 @@
                     return false;
                 } finally {
                     isSyncingNow = false;
-                    setRechargeTrafficState(!remoteConnected);
                 }
             }
 
             async function pullFromRemote() {
+                if (isSyncingNow) return;
                 isSyncingNow = true;
-                setRechargeTrafficState(true);
                 try {
                     const url = getRemoteDatabaseEndpoint();
                     if (!url) {
@@ -1228,7 +1257,9 @@
                         if (data) {
                             mergeRemoteData(data);
                         } else {
+                            isSyncingNow = false;
                             await pushToRemote();
+                            return;
                         }
                     } else {
                         remoteConnected = false;
@@ -1239,7 +1270,6 @@
                     updateSyncPills();
                 } finally {
                     isSyncingNow = false;
-                    setRechargeTrafficState(!remoteConnected);
                 }
             }
 
@@ -1533,7 +1563,7 @@
                 updateSpinButtonState();
             }
 
-            function enterWorkspace(mode, userId = null) {
+            async function enterWorkspace(mode, userId = null) {
                 activeMode = mode;
                 activeUserId = userId;
                 if (mode === "demo") {
@@ -1545,7 +1575,8 @@
                     u.isSpinning = false;
                     u.lastActiveAt = Date.now();
                     u.updatedAt = Date.now();
-                    persistState(true);
+                    applyPendingApprovedCreditsToUser(u);
+                    await persistState(true);
                 }
 
                 document.getElementById("entry-screen").classList.add("hidden");
@@ -1588,7 +1619,7 @@
                 } else if (activeMode === "real") {
                     const u = getActiveUser();
                     if (!u) return;
-                    u.balance = Number(u.balance) - currentBet;
+                    u.balance = Math.max(0, Number(u.balance) - currentBet);
                     u.totalWagered = (Number(u.totalWagered) || 0) + currentBet;
                     u.spinsCount = (Number(u.spinsCount) || 0) + 1;
                     if (u.has30kRecharge && !u.won50Spins30kBonus) {
@@ -1642,7 +1673,7 @@
                 });
             }
 
-            // ==================== RECARGAS Y ACREDITACIÓN FIRME ====================
+            // ==================== RECARGAS Y ACREDITACIÓN CON CREDIT ID ====================
             function buildRechargeWhatsAppUrl(userObj, amount) {
                 const adminWa = cleanPhoneDigits(state.settings.whatsappAdmin || DEFAULT_CLOUD_CONFIG.whatsappAdmin);
                 const nequiAcc = state.settings.nequiNumber || DEFAULT_CLOUD_CONFIG.nequiNumber;
@@ -1683,35 +1714,47 @@
             }
 
             async function creditUserBalance(userId, amount, fromRequestId = null) {
-                const u = state.users[userId];
                 const addAmt = Math.round(Number(amount) || 0);
-                if (!u || addAmt <= 0) return;
+                if (!userId || addAmt <= 0) return;
 
-                // Traer lo último de la nube primero para no perder giros o datos del jugador
                 await pullFromRemote();
 
-                const targetUser = state.users[userId] || u;
-                targetUser.balance = (Number(targetUser.balance) || 0) + addAmt;
-                if (addAmt >= PROMO_RECHARGE_30K) {
-                    targetUser.has30kRecharge = true;
-                    targetUser.spinsAfter30k = 0;
-                    targetUser.won50Spins30kBonus = false;
+                const targetUser = state.users[userId];
+                if (!targetUser) {
+                    notifyToast("No se encontró el usuario en la sala.", "error");
+                    return;
                 }
-                targetUser.updatedAt = Date.now() + 5000;
-                targetUser.rechargeAlert = {
-                    amount: addAmt,
-                    ts: Date.now()
-                };
 
+                const creditId = `cred_${fromRequestId || "manual"}_${Date.now()}`;
                 if (fromRequestId && Array.isArray(state.rechargeRequests)) {
                     const req = state.rechargeRequests.find((r) => r.id === fromRequestId);
                     if (req) {
                         req.status = "approved";
                         req.approvedAt = Date.now();
+                        req.creditId = req.creditId || creditId;
                     }
+                } else {
+                    const manualReq = {
+                        id: `rec_man_${Date.now()}`,
+                        creditId,
+                        userId: targetUser.id,
+                        nick: targetUser.nick,
+                        userName: targetUser.nick,
+                        whatsapp: targetUser.whatsapp,
+                        pin: targetUser.pin,
+                        nequiNumber: state.settings.nequiNumber || DEFAULT_CLOUD_CONFIG.nequiNumber,
+                        amount: addAmt,
+                        status: "approved",
+                        createdAt: Date.now(),
+                        approvedAt: Date.now()
+                    };
+                    state.rechargeRequests = mergeRequestArrays([manualReq], state.rechargeRequests);
                 }
 
+                applyPendingApprovedCreditsToUser(targetUser);
+                targetUser.updatedAt = Date.now() + 5000;
                 state.settings.updatedAt = Date.now() + 5000;
+
                 writeLocalOnly();
                 const savedOk = await pushToRemote();
 
@@ -1724,8 +1767,7 @@
                 if (savedOk) {
                     notifyToast(`Recarga de ${formatMoney(addAmt)} acreditada a ${targetUser.nick}.`, "success");
                 } else {
-                    notifyToast(`Guardado local de ${formatMoney(addAmt)} para ${targetUser.nick}. Reintentando nube...`, "info");
-                    setTimeout(() => pushToRemote(), 1200);
+                    notifyToast(`Guardado local de ${formatMoney(addAmt)} para ${targetUser.nick}.`, "info");
                 }
 
                 if (state.settings.autoOpenUserWa !== false) {
@@ -1755,15 +1797,28 @@
                 document.getElementById("wd-calc-net").textContent = formatMoney(playerNet);
             }
 
-            // ==================== PANEL ADMIN ====================
+            // ==================== PANEL ADMIN Y LIMPIAR HISTORIAL ====================
             function getPresenceInfo(u) {
                 const now = Date.now();
                 const last = Number((u && (u.lastActiveAt || u.updatedAt)) || 0);
                 const diffSec = Math.max(0, Math.floor((now - last) / 1000));
-                if (u && u.online && diffSec <= 40) {
-                    return { online: true, label: u.isSpinning ? "🎰 Jugando" : "🟢 En línea" };
+                if (u && u.online && diffSec <= 120) {
+                    return { online: true, label: u.isSpinning ? "Jugando" : "En línea" };
                 }
-                return { online: false, label: `⚪ Hace ${Math.max(1, Math.floor(diffSec / 60))}m` };
+                return { online: false, label: `Hace ${Math.max(1, Math.floor(diffSec / 60))}m` };
+            }
+
+            async function clearRequestsHistory() {
+                const ok = window.confirm("¿Limpiar el historial de solicitudes de recarga y retiro ya procesadas en esta sala?");
+                if (!ok) return;
+
+                await pullFromRemote();
+                state.rechargeRequests = (state.rechargeRequests || []).filter((r) => r.status === "pending");
+                state.withdrawalRequests = (state.withdrawalRequests || []).filter((w) => w.status === "pending");
+                state.settings.updatedAt = Date.now();
+                await persistState(true);
+                renderAdminPanel();
+                notifyToast("Historial de solicitudes limpiado.", "success");
             }
 
             function renderAdminPanel() {
@@ -1820,7 +1875,7 @@
                                 <div>
                                     <span class="font-black text-white">${u.nick}</span>
                                     <span class="text-white/70">(${u.whatsapp})</span>
-                                    <span class="ml-2 text-emerald-300 font-bold">🟢 En línea</span>
+                                    <span class="ml-2 text-emerald-300 font-bold">En línea</span>
                                 </div>
                                 <div class="text-amber-200 font-bold">${reqText}</div>
                             </div>
@@ -1905,7 +1960,7 @@
                                 <div class="flex flex-wrap items-center justify-between gap-2">
                                     <div class="flex items-center gap-2 flex-wrap">
                                         <span class="font-black text-sm text-white">${u.nick}</span>
-                                        <span class="text-xs font-bold">${pres.label}</span>
+                                        <span class="text-xs font-bold text-emerald-200">${pres.label}</span>
                                         <span class="text-white/70">WA: ${u.whatsapp} · PIN: ${u.pin}</span>
                                     </div>
                                     <span class="font-display text-base font-bold text-yellow-300">Saldo: ${formatMoney(u.balance)}</span>
@@ -1926,7 +1981,7 @@
                     }).join("");
                 }
 
-                document.getElementById("adm-cfg-dburl").value = normalizeDbUrl(state.settings.dbUrl);
+                document.getElementById("adm-cfg-dburl").value = DEFAULT_CLOUD_CONFIG.dbUrl;
                 document.getElementById("adm-cfg-room").value = state.settings.roomCode || DEFAULT_CLOUD_CONFIG.roomCode;
                 document.getElementById("adm-cfg-nequi").value = state.settings.nequiNumber || DEFAULT_CLOUD_CONFIG.nequiNumber;
                 document.getElementById("adm-cfg-wa-admin").value = state.settings.whatsappAdmin || DEFAULT_CLOUD_CONFIG.whatsappAdmin;
@@ -2042,6 +2097,7 @@
                             earlyHits30k: 0,
                             spinsAfter30k: 0,
                             won50Spins30kBonus: false,
+                            appliedCreditIds: [],
                             online: true,
                             isSpinning: false,
                             lastActiveAt: Date.now(),
@@ -2051,8 +2107,24 @@
                         };
                     }
 
-                    await persistState(true);
-                    enterWorkspace("real", uid);
+                    await enterWorkspace("real", uid);
+                });
+
+                document.getElementById("btn-refresh-balance").addEventListener("click", async () => {
+                    if (isSpinning) return;
+                    casinoAudio.ensureContext();
+                    casinoAudio.sfxClick();
+                    await pullFromRemote();
+                    if (activeMode === "real") {
+                        const u = getActiveUser();
+                        if (u) applyPendingApprovedCreditsToUser(u);
+                        updateHUD();
+                        checkRechargeAlertBanner();
+                        notifyToast(`Saldo actualizado: ${formatMoney(getCurrentBalance())}`, "success");
+                    } else {
+                        updateHUD();
+                        notifyToast("Saldo demo actualizado.", "info");
+                    }
                 });
 
                 document.getElementById("btn-switch-user").addEventListener("click", () => {
@@ -2125,8 +2197,10 @@
                     await pullFromRemote();
 
                     const u = getActiveUser();
+                    const reqId = `rec_${Date.now()}_${Math.floor(Math.random() * 1000)}`;
                     const req = {
-                        id: `rec_${Date.now()}_${Math.floor(Math.random() * 1000)}`,
+                        id: reqId,
+                        creditId: `cred_${reqId}`,
                         userId: u ? u.id : "demo",
                         nick: u ? u.nick : "Modo Demo",
                         userName: u ? u.nick : "Modo Demo",
@@ -2143,7 +2217,7 @@
                     await persistState(true);
                     refreshRechargeModalLinks();
 
-                    fb.textContent = "¡Solicitud registrada! Envía tu comprobante por WhatsApp al 3106047749 y recuerda esperar 1 minuto y recargar la página.";
+                    fb.textContent = "¡Solicitud registrada! Envía tu comprobante por WhatsApp al 3106047749 y toca Actualizar Saldo cuando te aprueben.";
                     fb.className = "rounded-xl px-3.5 py-2 text-xs font-bold bg-emerald-500/25 text-emerald-200 border border-emerald-400/40";
                     fb.classList.remove("hidden");
                     if (adminUnlocked) renderAdminPanel();
@@ -2175,6 +2249,8 @@
                         fb.classList.remove("hidden");
                         return;
                     }
+
+                    await pullFromRemote();
 
                     const u = getActiveUser();
                     const grossAmt = Math.round(Number(document.getElementById("withdraw-amount").value) || 0);
@@ -2244,6 +2320,8 @@
                     renderAdminPanel();
                 });
 
+                document.getElementById("btn-adm-clear-history").addEventListener("click", clearRequestsHistory);
+
                 document.getElementById("admin-pin-form").addEventListener("submit", async (e) => {
                     e.preventDefault();
                     const entered = (document.getElementById("admin-pin-input").value || "").trim();
@@ -2306,7 +2384,7 @@
                 });
 
                 document.getElementById("btn-adm-save-cfg").addEventListener("click", async () => {
-                    state.settings.dbUrl = normalizeDbUrl(document.getElementById("adm-cfg-dburl").value);
+                    state.settings.dbUrl = DEFAULT_CLOUD_CONFIG.dbUrl;
                     state.settings.roomCode = (document.getElementById("adm-cfg-room").value || DEFAULT_CLOUD_CONFIG.roomCode).trim();
                     state.settings.nequiNumber = (document.getElementById("adm-cfg-nequi").value || DEFAULT_CLOUD_CONFIG.nequiNumber).trim();
                     state.settings.whatsappAdmin = (document.getElementById("adm-cfg-wa-admin").value || DEFAULT_CLOUD_CONFIG.whatsappAdmin).trim();
@@ -2340,6 +2418,7 @@
                 const statusTxt = document.getElementById("loading-status-text");
 
                 try {
+                    state.settings.dbUrl = DEFAULT_CLOUD_CONFIG.dbUrl;
                     buildBulbRing("bulb-ring-top", 0);
                     buildBulbRing("bulb-ring-bottom", 1);
                     renderBetPills();
@@ -2349,7 +2428,7 @@
                     drawSlotCanvas(currentGrid, []);
 
                     if (bar) bar.style.width = "65%";
-                    if (statusTxt) statusTxt.textContent = "Sincronizando datos de la sala...";
+                    if (statusTxt) statusTxt.textContent = "Sincronizando con Firebase...";
 
                     await pullFromRemote();
 
@@ -2361,7 +2440,7 @@
                         document.getElementById("app-shell").classList.remove("hidden");
                         drawSlotCanvas(currentGrid, []);
                         if (activeMode === "real") checkRechargeAlertBanner();
-                    }, 420);
+                    }, 350);
 
                     casinoAudio.startLoop();
 
@@ -2372,21 +2451,23 @@
                             const m = (idx + tickBulbs) % 3;
                             el.className = `bulb ${m === 0 ? "active" : (m === 1 ? "alt" : "")}`;
                         });
-                    }, 480);
+                    }, 550);
 
                     setInterval(async () => {
                         if (isSpinning || isSyncingNow) return;
-                        const u = getActiveUser();
-                        if (activeMode === "real" && u) {
-                            u.online = true;
-                            u.isSpinning = false;
-                            u.lastActiveAt = Date.now();
-                            u.updatedAt = Date.now();
+                        if (activeMode === "real") {
+                            const u = getActiveUser();
+                            if (u) {
+                                u.online = true;
+                                u.isSpinning = false;
+                                u.lastActiveAt = Date.now();
+                                u.updatedAt = Date.now();
+                            }
                             await persistState(true);
                         } else {
                             await pullFromRemote();
                         }
-                    }, 4000);
+                    }, 25000);
                 } catch (err) {
                     document.getElementById("loading-screen").classList.add("hidden");
                     document.getElementById("app-shell").classList.remove("hidden");
